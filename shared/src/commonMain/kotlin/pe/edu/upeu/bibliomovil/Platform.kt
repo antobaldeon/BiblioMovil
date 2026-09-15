@@ -1,4 +1,4 @@
-package pe.edu.upeu.bibliomovil
+package pe.edu.upeu.bibliomobil
 
 interface Platform {
     val name: String

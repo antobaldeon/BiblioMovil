@@ -1,4 +1,4 @@
-package pe.edu.upeu.bibliomovil.domain.usecase
+package pe.edu.upeu.bibliomobil.domain.usecase
 
 
 class LibroInvalidoException(

@@ -1,4 +1,4 @@
-package pe.edu.upeu.bibliomovil
+package pe.edu.upeu.bibliomobil
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image

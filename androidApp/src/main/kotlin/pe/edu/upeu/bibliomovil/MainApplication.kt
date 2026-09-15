@@ -1,4 +1,4 @@
-package pe.edu.upeu.bibliomovil
+package pe.edu.upeu.bibliomobil
 
 import android.app.Application
 

@@ -1,6 +1,6 @@
 package pe.edu.upeu.bibliomobil.presentation.libro
 
-import pe.edu.upeu.bibliomovil.domain.model.Libro
+import pe.edu.upeu.bibliomobil.domain.model.Libro
 
 data class LibroUi(
     val id: Long,

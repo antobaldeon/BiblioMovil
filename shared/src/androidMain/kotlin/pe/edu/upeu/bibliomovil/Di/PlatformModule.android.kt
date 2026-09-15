@@ -1,4 +1,4 @@
-package pe.edu.upeu.bibliomovil.Di
+package pe.edu.upeu.bibliomobil.Di
 
 import org.koin.core.module.Module
 import org.koin.dsl.module

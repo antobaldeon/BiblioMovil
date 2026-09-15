@@ -2,9 +2,9 @@ package pe.edu.upeu.bibliomobil.domain.usecase
 
 import pe.edu.upeu.bibliomobil.domain.model.Lector
 import pe.edu.upeu.bibliomobil.domain.repository.LectorRepository
-import pe.edu.upeu.bibliomovil.domain.usecase.ErroresDeLector
-import pe.edu.upeu.bibliomovil.domain.usecase.LectorInvalidoException
-import pe.edu.upeu.bibliomovil.domain.usecase.resultadoDe
+import pe.edu.upeu.bibliomobil.domain.usecase.ErroresDeLector
+import pe.edu.upeu.bibliomobil.domain.usecase.LectorInvalidoException
+import pe.edu.upeu.bibliomobil.domain.usecase.resultadoDe
 
 class RegistrarLectorUseCase(
     private val lectorRepository: LectorRepository

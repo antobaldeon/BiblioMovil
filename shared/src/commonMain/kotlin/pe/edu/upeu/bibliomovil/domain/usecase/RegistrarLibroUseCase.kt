@@ -1,7 +1,7 @@
-package pe.edu.upeu.bibliomovil.domain.usecase
+package pe.edu.upeu.bibliomobil.domain.usecase
 
 import pe.edu.upeu.bibliomobil.domain.repository.LibroRepository
-import pe.edu.upeu.bibliomovil.domain.model.Libro
+import pe.edu.upeu.bibliomobil.domain.model.Libro
 
 class RegistrarLibroUseCase(
     private val libroRepository: LibroRepository

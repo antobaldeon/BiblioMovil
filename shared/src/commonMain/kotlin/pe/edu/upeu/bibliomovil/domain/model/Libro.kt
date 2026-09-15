@@ -1,4 +1,4 @@
-package pe.edu.upeu.bibliomovil.domain.model
+package pe.edu.upeu.bibliomobil.domain.model
 
 data class Libro(
     val id: Long,

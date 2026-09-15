@@ -1,6 +1,6 @@
 package pe.edu.upeu.bibliomobil.domain.model
 
-import pe.edu.upeu.bibliomovil.domain.model.Libro
+import pe.edu.upeu.bibliomobil.domain.model.Libro
 
 data class DetallePrestamo(
     val libro: Libro,

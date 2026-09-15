@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pe.edu.upeu.bibliomobil.domain.usecase.ListarLibrosUseCase
-import pe.edu.upeu.bibliomovil.domain.usecase.LibroInvalidoException
-import pe.edu.upeu.bibliomovil.domain.usecase.RegistrarLibroUseCase
+import pe.edu.upeu.bibliomobil.domain.usecase.LibroInvalidoException
+import pe.edu.upeu.bibliomobil.domain.usecase.RegistrarLibroUseCase
 
 class LibroViewModel(
     private val registrarLibro: RegistrarLibroUseCase,

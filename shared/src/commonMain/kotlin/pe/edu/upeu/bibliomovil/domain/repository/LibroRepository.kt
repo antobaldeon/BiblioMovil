@@ -1,6 +1,6 @@
 package pe.edu.upeu.bibliomobil.domain.repository
 
-import pe.edu.upeu.bibliomovil.domain.model.Libro
+import pe.edu.upeu.bibliomobil.domain.model.Libro
 
 interface LibroRepository {
 

@@ -1,4 +1,4 @@
-package pe.edu.upeu.bibliomobil.presentation.libro
+package pe.edu.upeu.bibliomobil.presentation.lector
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,9 +11,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ErrorOutline
-import androidx.compose.material.icons.automirrored.filled.MenuBook
-import androidx.compose.material3.AssistChip
-import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
@@ -31,8 +29,8 @@ import pe.edu.upeu.bibliomobil.presentation.components.MensajeExito
 import pe.edu.upeu.bibliomobil.presentation.components.ValidatedTextField
 
 @Composable
-fun LibroScreen(
-    viewModel: LibroViewModel,
+fun LectorScreen(
+    viewModel: LectorViewModel,
     modifier: Modifier = Modifier
 ) {
     val estado by viewModel.uiState.collectAsState()
@@ -43,13 +41,12 @@ fun LibroScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
-            FormularioLibro(
+            FormularioLector(
                 formulario = estado.formulario,
                 registrando = estado.registrando,
-                onTituloChange = viewModel::onTituloChange,
-                onAutorChange = viewModel::onAutorChange,
-                onAnioChange = viewModel::onAnioChange,
-                onEjemplaresChange = viewModel::onEjemplaresChange,
+                onNombreChange = viewModel::onNombreChange,
+                onCorreoChange = viewModel::onCorreoChange,
+                onTelefonoChange = viewModel::onTelefonoChange,
                 onRegistrar = viewModel::registrar
             )
         }
@@ -61,7 +58,7 @@ fun LibroScreen(
         }
 
         when (val fase = estado.fase) {
-            FaseLibro.Cargando -> {
+            FaseLector.Cargando -> {
                 item {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -73,30 +70,30 @@ fun LibroScreen(
 
                 item {
                     Text(
-                        text = "Cargando catálogo…",
+                        text = "Cargando cartera de lectores…",
                         modifier = Modifier.fillMaxWidth(),
                         style = MaterialTheme.typography.bodyMedium
                     )
                 }
             }
 
-            FaseLibro.SinLibros -> {
+            FaseLector.SinLectores -> {
                 item {
                     EstadoVacio(
-                        icono = Icons.AutoMirrored.Filled.MenuBook,
-                        titulo = "No hay libros registrados",
-                        descripcion = "Registra el primer libro del catálogo."
+                        icono = Icons.Default.Person,
+                        titulo = "No hay lectores registrados",
+                        descripcion = "Registra el primer lector de la biblioteca."
                     )
                 }
             }
 
-            is FaseLibro.ConLibros -> {
+            is FaseLector.ConLectores -> {
                 item {
                     Text(
-                        text = if (fase.libros.size == 1) {
-                            "1 libro"
+                        text = if (fase.lectores.size == 1) {
+                            "1 lector"
                         } else {
-                            "${fase.libros.size} libros"
+                            "${fase.lectores.size} lectores"
                         },
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
@@ -104,22 +101,22 @@ fun LibroScreen(
                 }
 
                 items(
-                    items = fase.libros,
-                    key = { libro -> libro.id }
-                ) { libro ->
-                    TarjetaLibro(libro)
+                    items = fase.lectores,
+                    key = { lector -> lector.id }
+                ) { lector ->
+                    TarjetaLector(lector)
                 }
             }
 
-            is FaseLibro.Error -> {
+            is FaseLector.Error -> {
                 item {
                     EstadoVacio(
                         icono = Icons.Default.ErrorOutline,
                         titulo = fase.mensaje,
-                        descripcion = "Intenta cargar el catálogo nuevamente.",
+                        descripcion = "Intenta cargar la cartera nuevamente.",
                         esError = true,
                         textoAccion = "Reintentar",
-                        onAccion = viewModel::cargarLibros
+                        onAccion = viewModel::cargarLectores
                     )
                 }
             }
@@ -128,13 +125,12 @@ fun LibroScreen(
 }
 
 @Composable
-private fun FormularioLibro(
-    formulario: FormularioLibro,
+private fun FormularioLector(
+    formulario: FormularioLector,
     registrando: Boolean,
-    onTituloChange: (String) -> Unit,
-    onAutorChange: (String) -> Unit,
-    onAnioChange: (String) -> Unit,
-    onEjemplaresChange: (String) -> Unit,
+    onNombreChange: (String) -> Unit,
+    onCorreoChange: (String) -> Unit,
+    onTelefonoChange: (String) -> Unit,
     onRegistrar: () -> Unit
 ) {
     Card(
@@ -145,46 +141,32 @@ private fun FormularioLibro(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
-                text = "Registrar libro",
+                text = "Registrar lector",
                 style = MaterialTheme.typography.titleLarge
             )
 
             ValidatedTextField(
-                value = formulario.titulo,
-                onValueChange = onTituloChange,
-                label = "Título",
-                error = formulario.errorTitulo
+                value = formulario.nombre,
+                onValueChange = onNombreChange,
+                label = "Nombre",
+                error = formulario.errorNombre
             )
 
             ValidatedTextField(
-                value = formulario.autor,
-                onValueChange = onAutorChange,
-                label = "Autor",
-                error = formulario.errorAutor
+                value = formulario.correo,
+                onValueChange = onCorreoChange,
+                label = "Correo",
+                error = formulario.errorCorreo,
+                keyboardType = KeyboardType.Email
             )
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                ValidatedTextField(
-                    value = formulario.anio,
-                    onValueChange = onAnioChange,
-                    label = "Año",
-                    error = formulario.errorAnio,
-                    keyboardType = KeyboardType.Number,
-                    modifier = Modifier.weight(1f)
-                )
-
-                ValidatedTextField(
-                    value = formulario.ejemplares,
-                    onValueChange = onEjemplaresChange,
-                    label = "Ejemplares",
-                    error = formulario.errorEjemplares,
-                    keyboardType = KeyboardType.Number,
-                    modifier = Modifier.weight(1f)
-                )
-            }
+            ValidatedTextField(
+                value = formulario.telefono,
+                onValueChange = onTelefonoChange,
+                label = "Teléfono (opcional)",
+                error = formulario.errorTelefono,
+                keyboardType = KeyboardType.Phone
+            )
 
             Button(
                 onClick = onRegistrar,
@@ -204,8 +186,8 @@ private fun FormularioLibro(
 }
 
 @Composable
-private fun TarjetaLibro(
-    libro: LibroUi
+private fun TarjetaLector(
+    lector: LectorUi
 ) {
     Card(
         modifier = Modifier.fillMaxWidth()
@@ -215,33 +197,20 @@ private fun TarjetaLibro(
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             Text(
-                text = libro.titulo,
+                text = lector.nombre,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
 
             Text(
-                text = libro.autor,
+                text = lector.correo,
                 style = MaterialTheme.typography.bodyMedium
             )
 
             Text(
-                text = libro.lineaSecundaria,
+                text = lector.telefono,
                 style = MaterialTheme.typography.bodySmall
             )
-
-            if (libro.requiereReposicion) {
-                AssistChip(
-                    onClick = {},
-                    label = {
-                        Text("Pocos ejemplares")
-                    },
-                    colors = AssistChipDefaults.assistChipColors(
-                        containerColor = MaterialTheme.colorScheme.errorContainer,
-                        labelColor = MaterialTheme.colorScheme.onErrorContainer
-                    )
-                )
-            }
         }
     }
 }

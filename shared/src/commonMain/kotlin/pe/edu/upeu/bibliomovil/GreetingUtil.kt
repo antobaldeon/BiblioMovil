@@ -1,4 +1,4 @@
-package pe.edu.upeu.bibliomovil
+package pe.edu.upeu.bibliomobil
 
 fun sayHello(to: String): String =
     "Hello, $to!"
