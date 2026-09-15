@@ -24,8 +24,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -48,6 +46,7 @@ import pe.edu.upeu.bibliomobil.presentation.lector.LectorViewModel
 import pe.edu.upeu.bibliomobil.presentation.libro.LibroScreen
 import pe.edu.upeu.bibliomobil.presentation.libro.LibroViewModel
 import pe.edu.upeu.bibliomobil.presentation.navigation.Screen
+import pe.edu.upeu.bibliomobil.presentation.theme.BiblioMobilTheme
 
 private data class Destino(
     val screen: Screen,
@@ -95,9 +94,7 @@ private fun BiblioMobilApp() {
     val scope = rememberCoroutineScope()
     val destinoActual = DESTINOS.first { it.screen == pantallaActual }
 
-    MaterialTheme(
-        colorScheme = if (modoOscuro) darkColorScheme() else lightColorScheme()
-    ) {
+    BiblioMobilTheme(modoOscuro = modoOscuro) {
         ModalNavigationDrawer(
             drawerState = drawerState,
             drawerContent = {
