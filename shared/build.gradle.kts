@@ -55,6 +55,9 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            api(libs.koin.core) // Module se expone en platformModule e initKoin.
+            api(libs.koin.compose) // App usa KoinContext desde código compartido.
+            api(libs.koin.compose.viewmodel) // Las pantallas obtienen ViewModels con koinViewModel.
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -64,4 +67,5 @@ kotlin {
 
 dependencies {
     androidRuntimeClasspath(libs.compose.uiTooling)
+
 }
