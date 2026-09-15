@@ -1,4 +1,13 @@
-package pe.edu.upeu.bibliomovil.domain.usecase
+package pe.edu.upeu.bibliomobil.domain.usecase
 
-class ListarLectoresUseCase {
+import pe.edu.upeu.bibliomobil.domain.model.Lector
+import pe.edu.upeu.bibliomobil.domain.repository.LectorRepository
+import pe.edu.upeu.bibliomovil.domain.usecase.resultadoDe
+
+class ListarLectoresUseCase(
+    private val lectorRepository: LectorRepository
+) {
+    suspend operator fun invoke(): Result<List<Lector>> = resultadoDe {
+        lectorRepository.listar()
+    }
 }

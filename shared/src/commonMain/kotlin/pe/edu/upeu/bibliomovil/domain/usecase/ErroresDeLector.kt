@@ -1,4 +1,7 @@
 package pe.edu.upeu.bibliomovil.domain.usecase
 
-class ErroresDeLector {
-}
+data class ErroresDeLector(
+    val nombre: String? = null,
+    val correo: String? = null,
+    val telefono: String? = null
+)
