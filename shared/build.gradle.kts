@@ -19,7 +19,7 @@ kotlin {
     }
     
     android {
-       namespace = "pe.edu.upeu.bibliomovil.shared"
+       namespace = "pe.edu.upeu.bibliomobil.shared"
        compileSdk = libs.versions.android.compileSdk.get().toInt()
        minSdk = libs.versions.android.minSdk.get().toInt()
     
@@ -61,6 +61,7 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(libs.kotlinx.coroutines.test)
         }
     }
 }

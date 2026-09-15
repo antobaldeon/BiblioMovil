@@ -21,11 +21,11 @@ dependencies {
 }
 
 android {
-    namespace = "pe.edu.upeu.bibliomovil"
+    namespace = "pe.edu.upeu.bibliomobil"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "pe.edu.upeu.bibliomovil"
+        applicationId = "pe.edu.upeu.bibliomobil"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
