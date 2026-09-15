@@ -1,4 +1,8 @@
-package pe.edu.upeu.bibliomovil.domain.model
+package pe.edu.upeu.bibliomobil.domain.model
 
-class EstadoPrestamo {
+sealed class EstadoPrestamo {
+    data object Solicitado : EstadoPrestamo()
+    data object Entregado : EstadoPrestamo()
+    data object Devuelto : EstadoPrestamo()
+    data class Vencido(val diasRetraso: Int) : EstadoPrestamo()
 }
